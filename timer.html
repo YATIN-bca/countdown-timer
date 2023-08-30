@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown Timer</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 100px;
+  }
+  #timer {
+    font-size: 2em;
+  }
+</style>
+</head>
+<body>
+<div id="timer">00:00:00</div>
+
+<script>
+  // Set the target countdown time (change this to your desired time)
+  const targetTime = new Date().getTime() + 30 * 60 * 1000; // 30 minutes from now
+
+  function updateTimer() {
+    const currentTime = new Date().getTime();
+    const timeDifference = targetTime - currentTime;
+
+    if (timeDifference <= 0) {
+      document.getElementById("timer").textContent = "Time's up!";
+    } else {
+      const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+      const formattedTime = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+      document.getElementById("timer").textContent = formattedTime;
+    }
+  }
+
+  // Update the timer every second
+  setInterval(updateTimer, 1000);
+  updateTimer(); // Call it once to display the initial time
+</script>
+</body>
+</html>
